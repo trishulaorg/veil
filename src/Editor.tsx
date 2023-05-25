@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { $createParagraphNode, $createTextNode, $getRoot, $getSelection, TextNode } from 'lexical';
+import { TextNode } from 'lexical';
 // import {useEffect} from 'react';
 
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
@@ -32,7 +32,7 @@ export const Editor: React.FC = () => {
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <HistoryPlugin />
-      <PlainTextPlugin contentEditable={<ContentEditable className="w-full bg-white leading-6 p-4 border-2 border-black border-opacity-10 rounded-t-lg block" />} placeholder={<div>Enter some text...</div>} />
+      <PlainTextPlugin ErrorBoundary={() => null} contentEditable={<ContentEditable className="w-full bg-white leading-6 p-4 border-2 border-black border-opacity-10 rounded-t-lg block" />} placeholder={<div>Enter some text...</div>} />
       <MyRichEditorPlugin />
     </LexicalComposer>
   );
