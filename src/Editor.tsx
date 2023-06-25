@@ -1,39 +1,50 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { $getRoot, $getSelection } from 'lexical';
+import { Composer, ContentEditable, RichTextPlugin, MarkdownShortcutPlugin, useComposerContext } from '@lexical/react';
 
-import { TextNode } from 'lexical';
-// import {useEffect} from 'react';
-
-import { LexicalComposer } from '@lexical/react/LexicalComposer';
-import { PlainTextPlugin } from '@lexical/react/LexicalPlainTextPlugin';
-import { ContentEditable } from '@lexical/react/LexicalContentEditable';
-import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-
-export const MyRichEditorPlugin: React.FC = () => {
-  const [editor] = useLexicalComposerContext();
-  editor.registerNodeTransform(TextNode, (textNode) => {
-    if (textNode.getTextContent() === 'modified') {
-      textNode.setTextContent('re-modified');
-    }
-  });
-
-  return null;
+const theme = {
+    // Theme styling goes here
 };
 
-export const Editor: React.FC = () => {
-  const onError = (e: Error) => {
-    console.log(e);
-  };
-  const initialConfig = {
-    namespace: 'MyEditor',
-    onError,
-  };
+function onChange(editorState) {
+    editorState.read(() => {
+        const root = $getRoot();
+        const selection = $getSelection();
+        console.log(root, selection);
+    });
+}
 
-  return (
-    <LexicalComposer initialConfig={initialConfig}>
-      <HistoryPlugin />
-      <PlainTextPlugin ErrorBoundary={() => null} contentEditable={<ContentEditable className="w-full bg-white leading-6 p-4 border-2 border-black border-opacity-10 rounded-t-lg block" />} placeholder={<div>Enter some text...</div>} />
-      <MyRichEditorPlugin />
-    </LexicalComposer>
-  );
-};
+function MyCustomAutoFocusPlugin() {
+    const [editor] = useComposerContext();
+
+    useEffect(() => {
+        editor.focus();
+    }, [editor]);
+
+    return null;
+}
+
+function onError(error: Error) {
+    console.error(error);
+}
+
+function Editor() {
+    const initialConfig = {
+        namespace: 'MyEditor',
+        theme,
+        onError,
+    };
+
+    return (
+        <Composer initialConfig={initialConfig}>
+            <RichTextPlugin
+                contentEditable={<ContentEditable />}
+                placeholder={<div>Enter some text...</div>}
+            />
+            <MarkdownShortcutPlugin />
+            <MyCustomAutoFocusPlugin />
+        </Composer>
+    );
+}
+
+export default Editor;
