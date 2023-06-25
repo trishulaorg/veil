@@ -1,14 +1,12 @@
 import { useEffect } from 'react';
 import {$getRoot, $getSelection, EditorState} from 'lexical';
 import {LexicalComposer} from '@lexical/react/LexicalComposer';
-import {PlainTextPlugin} from '@lexical/react/LexicalPlainTextPlugin';
 import {ContentEditable} from '@lexical/react/LexicalContentEditable';
 import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
 import {OnChangePlugin} from '@lexical/react/LexicalOnChangePlugin';
 import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
-import {MarkdownShortcutPlugin} from '@lexical/react/LexicalMarkdownShortcutPlugin';
 
 const theme = {
   // Theme styling goes here
@@ -38,18 +36,13 @@ function onError(error: Error) {
 
 export function Editor() {
   const initialConfig = {
-    namespace: 'Veil',
+    namespace: 'veil',
     theme,
     onError,
   };
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <PlainTextPlugin
-        contentEditable={<ContentEditable />}
-        placeholder={<div>Enter some text...</div>}
-        ErrorBoundary={LexicalErrorBoundary}
-      />
       <OnChangePlugin onChange={onChange} />
       <HistoryPlugin />
       <MyCustomAutoFocusPlugin />
@@ -58,7 +51,6 @@ export function Editor() {
         placeholder={<div>Enter some text...</div>}  
         ErrorBoundary={LexicalErrorBoundary} 
       />
-      <MarkdownShortcutPlugin />
     </LexicalComposer>
   );
 }
