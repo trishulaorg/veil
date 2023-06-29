@@ -7,9 +7,17 @@ import {
   TextAlignLeftIcon,
   TextAlignRightIcon,
 } from '@radix-ui/react-icons';
+import { useEditorStateStore } from './useEditorStateStore';
 
-const ToolbarWidget = () => (
-  <Toolbar.Root
+const ToolbarWidget = () => {
+
+  const state = useEditorStateStore((s) => s.editorState);
+
+  const onBoldClick = () => {
+
+
+  }
+  return <Toolbar.Root
     className="flex p-[10px] w-full min-w-max rounded-md bg-white shadow-[0_2px_10px] shadow-blackA7"
     aria-label="Formatting options"
   >
@@ -76,6 +84,6 @@ const ToolbarWidget = () => (
       Share
     </Toolbar.Button>
   </Toolbar.Root>
-);
+};
 
 export default ToolbarWidget;

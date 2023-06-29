@@ -1,53 +1,55 @@
 import { create } from "zustand";
 
 interface IEditorState {
-  editorState: {
-    cursorPos: {
+  cursorPos: {
+    x: number;
+    y: number;
+  };
+  selection: {
+    start: {
       x: number;
       y: number;
     };
-    selection: {
-      start: {
-        x: number;
-        y: number;
-      };
-      end: {
-        x: number;
-        y: number;
-      };
+    end: {
+      x: number;
+      y: number;
     };
-    text: string;
-    lastTimeModified: Date;
   };
+  text: string;
+  lastTimeModified: Date;
+  currentState: "plain" | "bold" | "italic" | "underline";
 }
 
-export const useEditorState = create<IEditorState>((set) => ({
-  editorState: {
-    cursorPos: {
+export const useEditorStateStore = create<IEditorState>((set) => ({
+  cursorPos: {
+    x: 0,
+    y: 0,
+  },
+  selection: {
+    start: {
       x: 0,
       y: 0,
     },
-    selection: {
-      start: {
-        x: 0,
-        y: 0,
-      },
-      end: {
-        x: 0,
-        y: 0,
-      },
+    end: {
+      x: 0,
+      y: 0,
     },
-    text: "",
-    lastTimeModified: new Date(),
+  },
+  text: "",
+  lastTimeModified: new Date(),
+  currentState: "plain",
+  setCurrentState: (currentState: "plain" | "bold" | "italic" | "underline") => {
+    set((state) => ({
+      ...state,
+      currentState,
+    }));
   },
   setCursorPos: (x: number, y: number) => {
     set((state) => ({
-      editorState: {
-        ...state.editorState,
-        cursorPos: {
-          x,
-          y,
-        },
+      ...state,
+      cursorPos: {
+        x,
+        y,
       },
     }));
   },
@@ -56,29 +58,23 @@ export const useEditorState = create<IEditorState>((set) => ({
     end: { x: number; y: number }
   ) => {
     set((state) => ({
-      editorState: {
-        ...state.editorState,
-        selection: {
-          start,
-          end,
-        },
+      ...state,
+      selection: {
+        start,
+        end,
       },
-    }));
+    }))
   },
   setText: (text: string) => {
     set((state) => ({
-      editorState: {
-        ...state.editorState,
-        text,
-      },
+      ...state,
+      text,
     }));
   },
   setLastTimeModified: (lastTimeModified: Date) => {
     set((state) => ({
-      editorState: {
-        ...state.editorState,
-        lastTimeModified,
-      },
+      ...state,
+      lastTimeModified,
     }));
   }
 }));
