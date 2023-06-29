@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -23,6 +24,7 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
     "@types/react": "^18.2.7",
     "@types/react-dom": "^18.2.4",
     "@typescript-eslint/eslint-plugin": "^5.59.7",

@@ -63,7 +63,7 @@ export const useEditorStateStore = create<IEditorState>((set) => ({
         start,
         end,
       },
-    }))
+    }));
   },
   setText: (text: string) => {
     set((state) => ({
