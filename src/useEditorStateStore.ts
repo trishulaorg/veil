@@ -10,6 +10,6 @@ interface IEditorState {
 export const useEditorStateStore = create<IEditorState>((set) => ({
   editorState: null,
   setEditorState(state: EditorState) {
-    set({ editorState: state })
+    set({ editorState: state });
   }
 }));
