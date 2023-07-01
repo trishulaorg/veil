@@ -7,6 +7,8 @@ import {OnChangePlugin} from '@lexical/react/LexicalOnChangePlugin';
 import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import { useEditorStateStore } from './useEditorStateStore';
+import { ToolbarWidgetPlugin } from './Toolbar';
 
 const theme = {
   // Theme styling goes here
@@ -22,10 +24,17 @@ function onChange(editorState: EditorState) {
 }
 
 function MyCustomAutoFocusPlugin() {
-  const [editor] = useLexicalComposerContext();
+  const [editor]  = useLexicalComposerContext();
+  const { setEditorState } = useEditorStateStore();
+
   useEffect(() => {
+    // Set initial state of editor
+    setEditorState(editor.getEditorState());
+
+    // Call focus on the editor
     editor.focus();
-  }, [editor]);
+  }, [editor, setEditorState]);
+
   return null;
 }
 
@@ -43,13 +52,14 @@ export function Editor() {
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
+      <ToolbarWidgetPlugin />
       <OnChangePlugin onChange={onChange} />
       <HistoryPlugin />
       <MyCustomAutoFocusPlugin />
-      <RichTextPlugin 
-        contentEditable={<ContentEditable />}  
-        placeholder={<div>Enter some text...</div>}  
-        ErrorBoundary={LexicalErrorBoundary} 
+      <RichTextPlugin
+        contentEditable={<ContentEditable />}
+        placeholder={<div>Enter some text...</div>}
+        ErrorBoundary={LexicalErrorBoundary}
       />
     </LexicalComposer>
   );

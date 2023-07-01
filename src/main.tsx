@@ -7,7 +7,6 @@ import ToolbarWidget from './Toolbar';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <ToolbarWidget />
     <Editor />
   </React.StrictMode>,
 );
