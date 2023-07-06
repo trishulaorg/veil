@@ -4,10 +4,9 @@ import {
   FontItalicIcon,
   StrikethroughIcon,
 } from '@radix-ui/react-icons';
-import { useEditorStateStore } from './useEditorStateStore';
-import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND} from 'lexical';
-import { $wrapNodes } from '@lexical/selection'
-import { $createHeadingNode } from '@lexical/rich-text';
+import { /* $getSelection, $isRangeSelection, */ FORMAT_TEXT_COMMAND} from 'lexical';
+/*import { $wrapNodes } from '@lexical/selection';
+  import { $createHeadingNode } from '@lexical/rich-text';*/
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
 export const ToolbarWidgetPlugin = () => {
@@ -24,14 +23,14 @@ export const ToolbarWidgetPlugin = () => {
   const onStrikethroughClick = () => {
     editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough');
   };
-  const formatLargeHeading = () => {
-    editor.update(() => {
-      const selection = $getSelection();
-      if ($isRangeSelection(selection)) {
-        $wrapNodes(selection, () => $createHeadingNode("h1"));
-      }
-    })
-  }
+  // const formatLargeHeading = () => {
+  //  editor.update(() => {
+  //    const selection = $getSelection();
+  //    if ($isRangeSelection(selection)) {
+  //      $wrapNodes(selection, () => $createHeadingNode("h1"));
+  //    }
+  //  });
+  // };
   return <Toolbar.Root
     className="flex p-[10px] w-full min-w-max rounded-md bg-white shadow-[0_2px_10px] shadow-blackA7"
     aria-label="Formatting options"

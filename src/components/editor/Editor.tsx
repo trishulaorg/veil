@@ -18,7 +18,7 @@ function onChange(editorState: EditorState) {
   editorState.read(() => {
     const root = $getRoot();
     const selection = $getSelection();
-    // eslint-disable-next-line no-console
+     
     console.log(root, selection);
   });
 }
@@ -39,7 +39,7 @@ function MyCustomAutoFocusPlugin() {
 }
 
 function onError(error: Error) {
-  // eslint-disable-next-line no-console
+   
   console.error(error);
 }
 
