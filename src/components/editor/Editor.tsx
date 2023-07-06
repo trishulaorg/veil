@@ -7,8 +7,8 @@ import {OnChangePlugin} from '@lexical/react/LexicalOnChangePlugin';
 import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
-import { useEditorStateStore } from './useEditorStateStore';
-import { ToolbarWidgetPlugin } from './Toolbar';
+import { useEditorStateStore } from '@/store/useEditorStateStore';
+import { ToolbarWidgetPlugin } from '@/components/toolbar/Toolbar';
 
 const theme = {
   // Theme styling goes here
