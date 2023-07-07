@@ -33,6 +33,22 @@ export const ToolbarWidgetPlugin = () => {
      }
    });
   };
+  const formatMediumHeading = () => {
+   editor.update(() => {
+     const selection = $getSelection();
+     if ($isRangeSelection(selection)) {
+       $wrapNodes(selection, () => $createHeadingNode("h2"));
+     }
+   });
+  };
+  const formatSmallHeading = () => {
+   editor.update(() => {
+     const selection = $getSelection();
+     if ($isRangeSelection(selection)) {
+       $wrapNodes(selection, () => $createHeadingNode("h3"));
+     }
+   });
+  };
   return <Toolbar.Root
     className="flex p-[10px] w-full min-w-max rounded-md bg-white shadow-[0_2px_10px] shadow-blackA7"
     aria-label="Formatting options"
@@ -70,25 +86,25 @@ export const ToolbarWidgetPlugin = () => {
           onClick={formatLargeHeading}
         >
           <HeadingIcon />
-          <span>H1</span>
+          <span>1</span>
         </Toolbar.ToggleItem>
         <Toolbar.ToggleItem
           className="flex-shrink-0 flex-grow-0 basis-auto text-mauve11 h-[25px] px-[5px] rounded inline-flex text-[13px] leading-none items-center justify-center bg-white ml-0.5 outline-none hover:bg-violet3 hover:text-violet11 focus:relative focus:shadow-[0_0_0_2px] focus:shadow-violet7 first:ml-0 data-[state=on]:bg-violet5 data-[state=on]:text-violet11"
           value="h2"
           aria-label="Heading 2"
-          onClick={() => {/* noop */}}
+          onClick={formatMediumHeading}
         >
           <HeadingIcon />
-          <span>H2</span>
+          <span>2</span>
         </Toolbar.ToggleItem>
         <Toolbar.ToggleItem
           className="flex-shrink-0 flex-grow-0 basis-auto text-mauve11 h-[25px] px-[5px] rounded inline-flex text-[13px] leading-none items-center justify-center bg-white ml-0.5 outline-none hover:bg-violet3 hover:text-violet11 focus:relative focus:shadow-[0_0_0_2px] focus:shadow-violet7 first:ml-0 data-[state=on]:bg-violet5 data-[state=on]:text-violet11"
           value="h3"
           aria-label="Heading 3"
-          onClick={() => {/* noop */ }}
+          onClick={formatSmallHeading}
         >
           <HeadingIcon />
-          <span>H3</span>
+          <span>3</span>
         </Toolbar.ToggleItem>
       </Toolbar.ToggleGroup>
     </Toolbar.ToggleGroup>
