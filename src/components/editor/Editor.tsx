@@ -9,6 +9,11 @@ import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { useEditorStateStore } from '@/store/useEditorStateStore';
 import { ToolbarWidgetPlugin } from '@/components/toolbar/Toolbar';
+import { HeadingNode, QuoteNode } from "@lexical/rich-text";
+import { TableCellNode, TableNode, TableRowNode } from "@lexical/table";
+import { ListItemNode, ListNode } from "@lexical/list";
+import { CodeHighlightNode, CodeNode } from "@lexical/code";
+import { AutoLinkNode, LinkNode } from "@lexical/link";
 
 const theme: EditorThemeClasses = {
   ltr: "text-left",
@@ -36,8 +41,6 @@ const theme: EditorThemeClasses = {
   text: {
     bold: "font-bold",
     italic: "italic",
-    overflowed: "overflow-hidden",
-    hashtag: "text-blue-500",
     underline: "underline",
     strikethrough: "line-through",
     underlineStrikethrough: "underline line-through",
@@ -111,6 +114,19 @@ export function Editor() {
   const initialConfig = {
     namespace: 'veil',
     theme,
+    nodes: [
+      HeadingNode,
+      ListNode,
+      ListItemNode,
+      QuoteNode,
+      CodeNode,
+      CodeHighlightNode,
+      TableNode,
+      TableCellNode,
+      TableRowNode,
+      AutoLinkNode,
+      LinkNode
+    ],
     onError,
   };
 
